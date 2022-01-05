@@ -1,10 +1,12 @@
 from Database import Database
+from Historico import Historico
 
 class Juego:
   def iniciar(self):
     nickname = ""
     while nickname == "":
       nickname = input("Escribe tu nickname: ")
+    self.nickname = nickname
 
     preguntas = []
     try:
@@ -31,3 +33,12 @@ class Juego:
       print("Felicitaciones. Total ganado de {}".format(acumulado))
     else:
       print("Uppps, perdiste todo")
+
+    self.ronda = ronda
+    self.acumulado = acumulado
+    Historico.guardarJuego(self)
+
+  def __repr__(self):
+    return "{}, ronda {}, acumulado {}".format(self.nickname, self.ronda, self.acumulado)
+
+

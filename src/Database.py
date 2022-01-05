@@ -78,3 +78,41 @@ class Database:
     pregunta.opcion3 = row[6]
     pregunta.opcionCorrecta = row[7]
     return pregunta
+
+  def guardarJuego(juego):
+    sql = """
+    INSERT INTO historico (
+      nickname,
+      ronda,
+      acumulado
+    )
+    values (?,?,?)
+    """
+    cur = con.cursor()
+    cur.execute(sql, (
+      juego.nickname,
+      juego.ronda,
+      juego.acumulado))
+    con.commit()
+
+  def consultarHistoricoJuegos():
+    from Juego import Juego
+    sql = """
+    select
+      nickname,
+      ronda,
+      acumulado
+    from historico
+    order by nickname, acumulado
+    """
+    cur = con.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+    historico = []
+    for row in rows:
+      juego = Juego()
+      juego.nickname = row[0]
+      juego.ronda = row[1]
+      juego.acumulado = row[2]
+      historico.append(juego)
+    return historico

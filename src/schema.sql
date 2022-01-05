@@ -9,6 +9,13 @@ create table preguntas (
   opcionCorrecta text
 );
 
+create table historico (
+  id integer primary key autoincrement,
+  nickname text,
+  ronda integer,
+  acumulado integer
+);
+
 insert into preguntas (categoria,nivel,pregunta,opcion1,opcion2,opcion3,opcionCorrecta)
 values ('categoria1', 1, 'pregunta1', 'opcion11', 'opcion21', 'opcion31', 'opcion41');
 

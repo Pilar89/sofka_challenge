@@ -1,10 +1,10 @@
 from ConfigurarJuego import ConfigurarJuego
+from Historico import Historico
 from Juego import Juego
 
 class Menu:
   def __init__(self):
     self.configurarJuego = ConfigurarJuego()
-    self.juego = Juego()
 
   def imprimirMenu(self):
     while True:
@@ -17,7 +17,10 @@ class Menu:
       if opcion == "1":
         self.configurarJuego.imprimirMenu()
       elif opcion == "2":
-        self.juego.iniciar()
+        juego = Juego()
+        juego.iniciar()
+      elif opcion == "3":
+        Historico.mostrar()
       elif opcion == "4":
         break
       else:
