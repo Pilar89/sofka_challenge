@@ -33,3 +33,6 @@ class Pregunta:
 
   def guardar(self):
     Database.guardarPregunta(self)
+
+  def __str__(self):
+    return "(%s, %s, %s) %s" % (self.id, self.categoria, self.nivel, self.pregunta)
