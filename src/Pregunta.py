@@ -17,6 +17,7 @@ class Pregunta:
       print("Pregunta con datos vacios o no validos")
 
     pregunta.guardar()
+    print("Pregunta guardada exitosamente")
 
   def esValida(self):
     try:
