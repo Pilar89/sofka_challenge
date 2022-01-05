@@ -1,7 +1,7 @@
 from Database import Database
 from Pregunta import Pregunta
 
-class BancoPreguntas:
+class ConfigurarJuego:
   def imprimirMenu(self):
     while True:
       print("")

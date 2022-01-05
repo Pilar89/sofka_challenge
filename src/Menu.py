@@ -1,9 +1,9 @@
-from BancoPreguntas import BancoPreguntas
+from ConfigurarJuego import ConfigurarJuego
 from Juego import Juego
 
 class Menu:
   def __init__(self):
-    self.bancoPreguntas = BancoPreguntas()
+    self.configurarJuego = ConfigurarJuego()
     self.juego = Juego()
 
   def imprimirMenu(self):
@@ -15,7 +15,7 @@ class Menu:
       print("4. Salir")
       opcion = input("Elige la opcion: ")
       if opcion == "1":
-        self.bancoPreguntas.imprimirMenu()
+        self.configurarJuego.imprimirMenu()
       elif opcion == "2":
         self.juego.iniciar()
       elif opcion == "4":
