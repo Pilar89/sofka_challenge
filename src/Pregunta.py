@@ -40,7 +40,7 @@ class Pregunta:
     opcionCorrecta = random.randint(0, 3)
     opciones.insert(opcionCorrecta, self.opcionCorrecta)
     print("Categoria: {}".format(self.categoria))
-    print("{}?".format(self.pregunta))
+    print("{}".format(self.pregunta))
     opcion = 0
     while opcion <= 3:
       print("{}. {}".format(opcion + 1, opciones[opcion]))

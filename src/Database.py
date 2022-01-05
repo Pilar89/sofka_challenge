@@ -103,7 +103,7 @@ class Database:
       ronda,
       acumulado
     from historico
-    order by nickname, acumulado
+    order by acumulado desc, nickname
     """
     cur = con.cursor()
     cur.execute(sql)
