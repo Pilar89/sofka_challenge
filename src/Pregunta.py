@@ -1,3 +1,4 @@
+import random
 from Database import Database
 
 class Pregunta:
@@ -34,5 +35,28 @@ class Pregunta:
   def guardar(self):
     Database.guardarPregunta(self)
 
-  def __str__(self):
-    return "(%s, %s, %s) %s" % (self.id, self.categoria, self.nivel, self.pregunta)
+  def preguntar(self):
+    opciones = [self.opcion1, self.opcion2, self.opcion3]
+    opcionCorrecta = random.randint(0, 3)
+    opciones.insert(opcionCorrecta, self.opcionCorrecta)
+    print("Categoria: {}".format(self.categoria))
+    print("{}?".format(self.pregunta))
+    opcion = 0
+    while opcion <= 3:
+      print("{}. {}".format(opcion + 1, opciones[opcion]))
+      opcion += 1
+    opcionCorrecta += 1
+    print("5. Abandonar el juego e irme con mi acumulado")
+    intento = ""
+    while intento == "":
+      try:
+        intento = input("Escoja una opcion: ")
+        intento = int(intento)
+      except:
+        pass
+    acierto = intento == opcionCorrecta
+    retiro = intento == 5
+    return (acierto, retiro)
+
+  def __repr__(self):
+    return "({}, {}, {}) {}".format(self.id, self.categoria, self.nivel, self.pregunta)

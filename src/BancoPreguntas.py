@@ -19,6 +19,6 @@ class BancoPreguntas:
         print("Opcion invalida")
 
   def mostrarPreguntas(self):
-    preguntas = Database.consultarPreguntas()
+    preguntas = Database.consultarTodasPreguntas()
     for pregunta in preguntas:
       print(pregunta)

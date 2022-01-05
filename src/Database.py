@@ -1,3 +1,4 @@
+import random
 import sqlite3
 
 con = sqlite3.connect('database.sqlite')
@@ -27,8 +28,7 @@ class Database:
       pregunta.opcionCorrecta))
     con.commit()
 
-  def consultarPreguntas():
-    from Pregunta import Pregunta
+  def consultarTodasPreguntas():
     sql = """
     select
       id,
@@ -47,14 +47,34 @@ class Database:
     rows = cur.fetchall()
     preguntas = []
     for row in rows:
-      pregunta = Pregunta()
-      pregunta.id = row[0]
-      pregunta.categoria = row[1]
-      pregunta.nivel = row[2]
-      pregunta.pregunta = row[3]
-      pregunta.opcion1 = row[4]
-      pregunta.opcion2 = row[5]
-      pregunta.opcion3 = row[6]
-      pregunta.opcionCorrecta = row[7]
+      pregunta = Database.crearPreguntaDesdeRow(row)
       preguntas.append(pregunta)
     return preguntas
+
+  def consultarPreguntasParaJuego():
+    todasPreguntas = Database.consultarTodasPreguntas()
+    random.shuffle(todasPreguntas)
+    preguntas = []
+    nivel = 1
+    while nivel <= 5:
+      for pregunta in todasPreguntas:
+        if pregunta.nivel == nivel:
+          preguntas.append(pregunta)
+          break
+      nivel += 1
+    if len(preguntas) < 5:
+      raise "no hay suficientes preguntas"
+    return preguntas
+
+  def crearPreguntaDesdeRow(row):
+    from Pregunta import Pregunta
+    pregunta = Pregunta()
+    pregunta.id = row[0]
+    pregunta.categoria = row[1]
+    pregunta.nivel = row[2]
+    pregunta.pregunta = row[3]
+    pregunta.opcion1 = row[4]
+    pregunta.opcion2 = row[5]
+    pregunta.opcion3 = row[6]
+    pregunta.opcionCorrecta = row[7]
+    return pregunta
